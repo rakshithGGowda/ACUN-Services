@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+ext {
+    PUBLISH_GROUP_ID = 'com.rvalerio'
+    PUBLISH_ARTIFACT_ID = 'fgchecker'
+    PUBLISH_VERSION = '1.1.0'
+}
+
+publish {
+    groupId = 'com.rvalerio'
+    artifactId = 'fgchecker'
+    publishVersion = '1.1.0'
+    desc = 'Foreground application detection library for android.'
+    licences = ['Apache-2.0']
+    uploadName = 'foregroundappchecker'
+    website = 'https://github.com/ricvalerio/foregroundappchecker.git'
+}
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.1'
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.0.1'
+    testCompile 'junit:junit:4.12'
+}
+
+apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
